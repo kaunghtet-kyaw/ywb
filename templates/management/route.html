@@ -1,0 +1,163 @@
+{% extends "management/base.html" %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="card">
+					<div class="card-header">
+						<h2>Route</h2>
+					</div>
+					<div class="card-body">
+						<form id="records">
+							{% if session['role'] == 'Admin' %}
+							<div class="row">
+								<div class="form-group col-md-8">
+								</div>
+								<div class="form-group col-md-4">
+									<button class="btn btn-warning btn-block float-right btn_add" data-toggle="modal" data-target="#routeAddModal" type="button"> Add New</button>
+								</div>
+							</div>
+							{% endif %}
+							<div class="form-group col-md-12">
+								<table id="tblrecord" class="table" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Route Name</th>
+											<th>Description</th>
+											<th>Price</th>
+											<th>Created Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</thead>
+									<tbody id="record_info">
+										{% if records %}
+										{% for temp in records %}
+										<tr>
+											<td>{{loop.index}}</td>
+											<td>{{temp.RouteName}}</td>
+											<td onmousemove="this.innerHTML = '{{temp.RDescription|safe}}'" onmouseout="this.innerHTML = '{{temp.RDescription|safe|truncate(60,True)}}'">{{temp.RDescription|safe|truncate(60,True)}}</td>
+											<td>{{temp.RPrice}} Ks</td>
+											<td>{{temp.CreatedDate}}</td>
+											<td>{{temp.ModifiedDate}}</td>
+											{% if session['role'] == 'Admin' %}
+											<td class="btn_action">
+												<button type="button" class="btn btn-warning btn-edit float-left" name="r_id" value="{{temp.RID}}" data-toggle="modal" data-target="#routeEditModal" onclick="edit_Route(this.value)"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
+												<button type="button" class="btn btn-danger float-left" name="del_r_id" value="{{temp.RID}}" onclick="del_Route(this.value)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+											</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+										{% endif %}
+										
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Route Name</th>
+											<th>Description</th>
+											<th>Price</th>
+											<th>Created Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</tfoot><!-- tfoot.// -->
+								</table><!-- table.// -->
+							</div><!-- form-group.// -->
+						</form><!-- record form.// -->
+					</div>
+				</div>
+			</div>
+			{% if session['role'] == 'Admin' %}
+			<!-- Modal -->
+			<div class="modal fade" id="routeAddModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="routeAddForm" action="/management/addRoute">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Add New Route Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="r_name" class="col-md-4 col-form-label text-md-right">Route Name </label>
+									<div class="col-md-8">
+										<input type="text" id="r_name" class="form-control" name="r_name" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="r_desc" class="col-md-4 col-form-label text-md-right">Route Description </label>
+									<div class="col-md-8">
+										<textarea id="r_desc" class="form-control txteditor" name="r_desc" required autofocus rows="">
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="price" class="col-md-4 col-form-label text-md-right">Price </label>
+									<div class="col-md-8">
+										<input type="number" id="r_price" class="form-control" name="r_price" min="0" required autofocus>
+									</div>
+								</div>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-warning" onclick="add_Route()">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal fade" id="routeEditModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="routeEditForm" action="/management/editRoute">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Edit Route Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="r_id" class="col-md-4 col-form-label text-md-right">Route ID </label>
+									<div class="col-md-8">
+										<input type="text" id="edit_r_id" class="form-control" name="edit_r_id" disabled="" required="true">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="r_name" class="col-md-4 col-form-label text-md-right">Route Name </label>
+									<div class="col-md-8">
+										<input type="text" id="edit_r_name" class="form-control" name="edit_r_name" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="r_desc" class="col-md-4 col-form-label text-md-right">Route Description </label>
+									<div class="col-md-8">
+										<textarea id="edit_r_desc" class="form-control txteditor" name="edit_r_desc" required autofocus>
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="r_price" class="col-md-4 col-form-label text-md-right">Price </label>
+									<div class="col-md-8">
+										<input type="number" id="edit_r_price" class="form-control" name="edit_r_price" required autofocus>
+									</div>
+								</div>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" onclick="update_Route()" class="btn btn-warning">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			{% endif%}
+	{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}Reset Password{% endblock %}
+
+{% block content %}
+<div class="login-container">
+<div class="resetpwd">
+	<hr>
+	<div class="lg_logo "><img src="../static/images/banner_logo.png"></div>
+	<hr>
+	<div class="links">
+		<a href="#" class="active">Reset Password</a>
+	</div>
+	<form action="{{ url_for('resetpwdmm') }}" method="post">
+		<input class="pwdrecovery" type="email" name="EmailAdd"  placeholder="example@gmail.com" required>
+		 	<div>
+			   <select class="selop">
+				   	<option>Who is your favorite actor?</option>
+				   	<option>What is the name of your favorite pet?</option>
+				   	<option>What was your favorite place to visit as a child?</option>
+			   </select>
+			   <input id="question" name="Ans1" placeholder="answer" type="text" required>
+			   <select class="selop">
+				   	<option>Who is your favourite person?</option>
+				   	<option>Who is your favourite idol?</option>
+				   	<option>What is your favourite movie?</option>
+			   </select>
+			   <input id="question" name="Ans2" placeholder="answer" type="text" required>
+			   <select class="selop">
+				   	<option>Where did your parents meet?</option>
+				   	<option>What is your hobby ?</option>
+				   	<option>What is your favorite beach ?</option>
+			   </select>
+			   <input id="question" name="Ans3" placeholder="answer" type="text" required>
+				
+
+		    </div>
+
+			<input type="submit" id="sbtn" value="Finish">
+			<p class="rempwd">Did you remember your password?<a href="{{ url_for('loginmm') }}"> Try Logging In.</a></p>
+	</form>
+</div>
+</div>
+{% endblock %}

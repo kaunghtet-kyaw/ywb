@@ -1,0 +1,94 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}ခရီးစဉ်ဇယားများ{% endblock %}
+
+{% block content %}
+<div class="body-main">
+	<div class="container" >
+  <div class="body-main">
+  <div class="row">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('homemm') }}">ပင်မစာမျက်နှာ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ခရီးစဉ်ဇယားများ</li>
+          </ol>
+      </nav>
+  </div>
+  <div class="row  content-contact" style="height: 120px; margin-bottom: 20px;">
+      <p class="conus">ခရီးစဉ်ဇယားများ</p>
+  </div>
+  <div class="row jetty">
+      <div class="col-md-8 card ">
+        <div class="card-header">
+            <select class="stype form-control route-selection">
+            <option class="RID" value="0"> သွားလိုရာလမ်းကြောင်းရွေးချယ်ပါ</option>
+
+             {% if records %}
+             {% for temp in records %}
+                <option value="{{temp.RID}}">{{temp.RouteName}}</option>
+             {% endfor %}
+             {% endif %}   
+            </select>
+        </div>
+        <div class="card-header">
+            <!-- <div class="row"> -->
+            <!-- <div class="col-md-8 col-sm-8"> -->
+              <select class="form-control type-select" name="JID">
+                <option class="SID" value="0"> အမျိးစားရွေးချယ်ပါ</option>
+                {% if records %}
+                {% for temp in records %}
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden" value="All">အားလုံး</option>
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden" value="Weekday">ရုံးတတ်ရက်</option>
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden"  value="Weekend">ရုံးပိတ်ရန်</option>
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden"  value="Special Schedule">အထူးနေ့စွဲ </option>
+                {% endfor %}
+                {% endif %}
+              </select> 
+            <!-- </div> -->
+            
+          <!-- </div> -->
+        </div>
+
+        <div class="card-body">
+            <form id="records">
+              <div class="form-group col-md-12">
+                  <table id="tblrecord" class="table" width="100%">    
+                   <thead>
+                      <tr> 
+                        <th>အမျိုးအစားများ</th>
+                          <th>ဆိပ်ခံတံတား</th>
+                          <th>ထွက်ခွါချိန်</th>
+                          <th>လက်မခ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="record_info" class="recruiter detail-select">
+                    {% if Sch_records %}
+                    {% for temp in Sch_records %}
+                      <tr data-eventttype="{{temp.SType}}" class="SID hidden">
+
+                          <td>{{temp.SType}}</td>
+                          <td>{{temp.JettyName}}</td>
+                          <td>{{temp.FSTime}}</td>
+                          <td>{{temp.RPrice}} Ks</td>
+                      </tr>
+                    {% endfor %}
+                    {% endif %}
+                    </tbody>
+                         
+                  </table><!-- table.// -->
+              </div><!-- form-group.// -->
+            </form><!-- record form.// -->
+
+        </div>
+     
+      </div>
+     
+    
+   <div class="col-md-3 btn-book-div">
+    <a href="{{ url_for('bookingmm') }}" class="btn-book"><i class="fa fa-ticket" aria-hidden="true"></i>လက်မှတ်ဘွတ်တင်ရန်</a>            
+  </div>
+  </div>
+
+  </div>
+</div>
+{% endblock %}

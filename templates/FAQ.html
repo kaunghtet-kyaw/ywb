@@ -1,0 +1,70 @@
+{% extends 'layout.html' %}
+
+{% block title %}FAQ{% endblock %}
+
+{% block content %}
+<div class="container">
+        <button id="question1" class="accordion" onclick="openFAQ('panel1')">Question 1: Getting Started</button>
+        <div id="panel1" class="panel">
+            <ul>
+                <li>First of all, you require to have an account<br> (If you don't have an account, you have to register first but if you already have, you just need to login)</li>
+                <li>Then, go to the schdule page</li>
+                <li>And, book for your trip</li>
+                <li>After that, you will get a reciept by exporting it</li>
+            </ul>
+        </div>
+
+        <button id="question2" class="accordion" onclick="openFAQ('panel2')">Question 2: Finding information</button>
+        <div id="panel2" class="panel">
+            <p>If you want to find infomartion about our company. There is a page called "About us" which you can find in navigation bar. You can also go there by clicking <a href="">this</a>. You can also find about our goals and history of our company</p>
+        </div>
+
+        <button id="question3" class="accordion" onclick="openFAQ('panel3')">Question 3: How can I contact office?</button>
+        <div id="panel3" class="panel">
+            <p>There is a page called "<a href="">Contact us</a>" which includes physical address of yangon water bus office and the form that users can complains or give feedback about our services. You can also find phone numbers and email addresses that
+                users can contact. You can also find some contact information at the footer of our website</p>
+        </div>
+
+        <button id="question4" class="accordion" onclick="openFAQ('panel4')">Question 4: How can I complain or give feedback?</button>
+        <div id="panel4" class="panel">
+            <p>There is a form that users can complain, suggest and give feedback in "<a href="">Contact us</a> page. Users only have to input name and email which will be recorded in database and he have to enter subject and description which he wants to
+                report. After that he need to click send button to submit "</p>
+        </div>
+
+        <button id="question5" class="accordion" onclick="openFAQ('panel5')">Question 5: How do I find information about routes and schedule?</button>
+        <div id="panel5" class="panel">
+            <ul>
+                <li>For route information, you have to click services in navigation bar and click jetties</li>
+                <li> If user wants to find about schedule information, you have to choose schedule instead of jetties in services dropdown. </li>
+            </ul>
+        </div>
+
+        <button id="question6" class="accordion" onclick="openFAQ('panel6')">Question 6: Where are the jetties?</button>
+        <div id="panel6" class="panel">
+            <p>Our jetties are located along the river across the city. Please click here to see the map showing all of our jetties. Click <a href="">here</a>for more information.</p>
+        </div>
+
+        <button id="question7" class="accordion" onclick="openFAQ('panel7')">Question 7: How do I find nearby bus stops</button>
+        <div id="panel7" class="panel">
+            <p>You can find nearby bus stop information at jetties from services dropdown.<a href="">Click Here!</a></p>
+        </div>
+
+        <button id="question8" class="accordion" onclick="openFAQ('panel8')">Question 8: Do I need to have an account for booking?</button>
+        <div id="panel8" class="panel">
+            <p>Yes, you should need an account to book your trip.</p>
+        </div>
+
+        <button id="question9" class="accordion" onclick="openFAQ('panel9')">Question 9: Why do we have to arrive earlier than departure time?</button>
+        <div id="panel9" class="panel">
+            <p>Sometimes, customer can forget or not available to arrive in time and they wont have time to let us know they cancel their booking. In this case, it will be loss for customer who are at jetty and cant get tickets. So, we made this kind of
+                policy
+            </p>
+        </div>
+
+        <button id="question10" class="accordion" onclick="openFAQ('panel10')">Question 10: How can i find news and events? </button>
+        <div id="panel10" class="panel">
+            <p>News and Events information are important for customers. So, customer can learn events and news at <a href="">here</a></p>
+        </div>
+
+    </div>
+{% endblock %}

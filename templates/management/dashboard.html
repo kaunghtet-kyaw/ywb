@@ -1,0 +1,243 @@
+{% extends "management/base.html" %}
+	{% block head %} Dashboard {% endblock %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="row" id="dashboard_report">
+					<!-- Total Users -->
+					
+
+					<!-- Total Pending Booking -->
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-info shadow h-100 py-2 dashboard_report">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-success text-uppercase mb-1">Pending Bookings </div>
+										<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+											{% if b_records %}
+											{{b_records|length}}
+											{% else %}
+											{{0}}
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-warning shadow h-100 py-2 dashboard_report">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Users </div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											{% if u_records %}
+											{{u_records|length}}
+											{% else %}
+												{{0}}
+											{% endif %}
+										</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-user fa-2x text-gray-300"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Total Unread Mail -->
+					<div class="col-xl-4 col-md-6 mb-4">
+						<div class="card border-left-warning shadow h-100 py-2 dashboard_report">
+							<div class="card-body">
+								<div class="row no-gutters align-items-center">
+									<div class="col mr-2">
+										<div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Unread Mails</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">
+												{% if m_records %}
+												{{m_records|length}}
+												{% else %}
+												{{0}}
+												{% endif %}
+											</div>
+									</div>
+									<div class="col-auto">
+										<i class="fas fa-comments fa-2x text-gray-300"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<div class="line"></div>
+				<div class="col-md-12 justify-content-center">
+					<div class="card">
+						<div class="card-header">
+							<h2>User Report</h2>
+						</div>
+						<div class="card-body">
+							<div class="col-md-5 col-sm-12 report_ttl">
+								<form id="records">
+									<table id="tblrecord" class="table" width="100%">
+										<thead>
+											<tr>
+												<th>#</th><!-- 
+												<th>Yearly</th>
+												<th>Monthly</th> -->
+												<th>Total User</th>
+											</tr>
+										</thead>
+										<tbody id="usr_record_info">
+											{% if rst_user_record %}
+											{% for temp in rst_user_record %}
+											<tr>
+												<!-- <td>{{loop.index}}</td> -->
+												<th>{{temp.Yearly}} - {{temp.Monthly}}</th>
+												<td> {{temp.TtlUsers}}</td>
+											</tr>
+											{% endfor %}
+											{% endif %}
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>#</th><!-- 
+												<th>Yearly</th>
+												<th>Monthly</th> -->
+												<th>Total User</th>
+											</tr>
+										</tfoot><!-- tfoot.// -->
+									</table><!-- table.// -->
+									<table id="tbluser" style="display: none;">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Total User</th>
+											</tr>
+										</thead>
+										<tbody id="usr_record_info">
+											{% if rst_user_record %}
+											{% for temp in rst_user_record %}
+											<tr>
+												<!-- <td>{{loop.index}}</td> -->
+												<th>{{temp.Yearly}} - {{temp.Monthly}}</th>
+												<td> {{temp.TtlUsers}}</td>
+											</tr>
+											{% endfor %}
+											{% endif %}
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>#</th>
+												<th>Total User</th>
+											</tr>
+										</tfoot><!-- tfoot.// -->
+									</table><!-- table.// -->
+								</form><!-- record form.// -->
+							</div>
+							
+							<div class="col-md-7 col-sm-12 report_ttl">
+								<div class="card border-left-primary shadow h-100 py-2 dashboard_report">
+									<div class="card-body">
+										<div id="chartUser">
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="line"></div>
+				<div class="col-md-12 justify-content-center">
+					<div class="card">
+						<div class="card-header">
+							<h2>Booking Report</h2>	
+						</div>
+						<div class="card-body">
+							<div class="col-md-5 col-sm-12 report_ttl">
+								<form id="records">
+									<table id="tblrecord" class="tblrecord table" width="100%">
+										<thead>
+											<tr>
+												<th >#</th>
+												<th>Total Booking</th>
+												<th>Total Tickets</th>
+											</tr>
+										</thead>
+										<tbody id="record_info">
+											{% if rst_booking_record %}
+											{% for temp in rst_booking_record %}
+											<tr>
+												<!-- <td>{{loop.index}}</td> -->
+												<th>{{temp.Yearly}} - {{temp.Monthly}}</th>
+												<td>{{temp.TtlBookings}}</td>
+												<td>{{temp.TtlTickets}}</td>
+											</tr>
+											{% endfor %}
+											{% endif %}
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>#</th>
+												<th>Total Booking</th>
+												<th>Total Tickets</th>
+											</tr>
+										</tfoot><!-- tfoot.// -->
+									</table><!-- table.// -->
+									<table id="tblbooking" style="display: none;">
+										<thead>
+											<tr>
+												<th >#</th>
+												<th>Total Booking</th>
+												<th>Total Tickets</th>
+											</tr>
+										</thead>
+										<tbody id="record_info">
+											{% if rst_booking_record %}
+											{% for temp in rst_booking_record %}
+											<tr>
+												<!-- <td>{{loop.index}}</td> -->
+												<th>{{temp.Yearly}} - {{temp.Monthly}}</th>
+												<td>{{temp.TtlBookings}}</td>
+												<td>{{temp.TtlTickets}}</td>
+											</tr>
+											{% endfor %}
+											{% endif %}
+											
+										</tbody>
+										<tfoot>
+											<tr>
+												<th>#</th>
+												<th>Total Booking</th>
+												<th>Total Tickets</th>
+											</tr>
+										</tfoot><!-- tfoot.// -->
+									</table><!-- table.// -->
+								</form><!-- record form.// -->
+							</div>
+							
+							<div class="col-md-7 col-sm-12 report_ttl">
+								<div class="card border-left-primary shadow h-100 py-2 dashboard_report">
+									<div class="card-body">
+										<div id="chartBooking">
+											
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+	{% endblock %}

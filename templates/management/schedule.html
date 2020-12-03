@@ -1,0 +1,183 @@
+{% extends "management/base.html" %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="card">
+					<div class="card-header">
+						<h2>Schedule</h2>
+					</div>
+					<div class="card-body">
+						<form id="records">
+							{% if session['role'] == 'Admin' %}
+							<div class="row">
+								<div class="form-group col-md-8">
+								</div>
+								<div class="form-group col-md-4">
+									<button class="btn btn-warning btn-block float-right btn_add" data-toggle="modal" data-target="#scheduleAddModal" type="button"> Add New</button>
+								</div>
+							</div>
+							{% endif %}
+							<div class="form-group col-md-12">
+								<table id="tblrecord" class="table" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Schedule Time</th>
+											<th>Schedule Type</th>
+											<th>Jetty Name</th>
+											<th>Posted Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</thead>
+									<tbody id="record_info">
+										{% if records %}
+										{% for temp in records %}
+										<tr>
+											<td>{{loop.index}}</td>
+											<td>{{temp.STime}}</td>
+											<td>{{temp.SType}}</td>
+											<td>{{temp.JettyName}}</td>
+											<td>{{temp.PostedDate}}</td>
+											<td>{{temp.ModifiedDate}}</td>
+											{% if session['role'] == 'Admin' %}
+											<td class="btn_action">
+												<button type="button" class="btn btn-warning btn-edit float-left" name="s_id" value="{{temp.SID}}" data-toggle="modal" data-target="#scheduleEditModal" onclick="edit_Schedule(this.value)"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
+												<button type="button" class="btn btn-danger float-left" name="del_s_id" value="{{temp.SID}}" onclick="del_Schedule(this.value)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+											</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+										{% endif %}
+										
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Schedule Time</th>
+											<th>Schedule Type</th>
+											<th>Jetty Name</th>
+											<th>Posted Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</tfoot><!-- tfoot.// -->
+								</table><!-- table.// -->
+							</div><!-- form-group.// -->
+						</form><!-- record form.// -->
+					</div>
+				</div>
+			</div>
+			{% if session['role'] == 'Admin' %}
+			<!-- Modal -->
+			<div class="modal fade" id="scheduleAddModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="scheduleAddForm" action="/management/addSchedule">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Add New Schedule Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="s_time" class="col-md-4 col-form-label text-md-right">Schedule Time </label>
+									<div class="col-md-8">
+										<input type="time" id="s_time" class="form-control" name="s_time" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="s_type" class="col-md-4 col-form-label text-md-right">Schedule Type </label>
+									<div class="col-md-8">
+										<select class="form-control" id="s_type" name="s_type">
+											<option class="s_type" value="0"> Choose Schedule Type </option>
+											<option class="s_type" value="Weekday">Weekday</option>
+											<option class="s_type" value="Weekend">Weekend</option>
+											<option class="s_type" value="Special Schedule">Special Schedule</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="s_type" class="col-md-4 col-form-label text-md-right">Jetty Name </label>
+									<div class="col-md-8">
+										<select class="form-control" id="s_jid" name="s_jid">
+											<option class="s_jid" value="0"> Choose Jetty Name </option>
+											{% if j_records %}
+											{% for temp in j_records %}
+											<option class="s_jid" value="{{temp.JID}}">{{temp.JettyName}} ({{temp.RouteName}})</option>
+											{% endfor %}
+											{% endif %}
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-warning" onclick="add_Schedule()">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal fade" id="scheduleEditModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="scheduleEditForm" action="/management/editSchedule">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Edit Route Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="edit_s_id" class="col-md-4 col-form-label text-md-right">Schedule ID </label>
+									<div class="col-md-8">
+										<input type="text" id="edit_s_id" class="form-control" name="edit_s_id" disabled="" required="true">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="edit_s_name" class="col-md-4 col-form-label text-md-right">Schedule Time </label>
+									<div class="col-md-8">
+										<input type="time" id="edit_s_time" class="form-control" name="edit_s_time" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="edit_s_type" class="col-md-4 col-form-label text-md-right">Schedule Type </label>
+									<div class="col-md-8">
+										<select class="form-control" id="edit_s_type" name="edit_s_type">
+											<option class="edit_s_type" value="0"> Choose Schedule Type </option>
+											<option class="edit_s_type" value="Weekday">Weekday</option>
+											<option class="edit_s_type" value="Weekend">Weekend</option>
+											<option class="edit_s_type" value="Special Schedule">Special Schedule</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="edit_s_type" class="col-md-4 col-form-label text-md-right">Jetty Name </label>
+									<div class="col-md-8">
+										<select class="form-control" name="edit_s_jid" id="edit_s_jid">
+											<option class="edit_s_jid" value="0"> Choose Jetty Name </option>
+											{% if j_records %}
+											{% for temp in j_records %}
+											<option class="edit_s_jid" value="{{temp.JID}}">{{temp.JettyName}} ({{temp.RouteName}})</option>
+											{% endfor %}
+											{% endif %}
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" onclick="update_Schedule()" class="btn btn-warning">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			{% endif%}
+	{% endblock %}

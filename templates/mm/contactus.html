@@ -1,0 +1,110 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}ဆက်သွယ်ရန်{% endblock %}
+
+{% block content %}
+<div class="container" >
+    <div class="body-main">
+    <div class="row">
+       <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('homemm') }}">ပင်မစာမျက်နှာ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ဆက်သွယ်ရန်</li>
+          </ol>
+        </nav>
+    </div>
+    <!-- <div class="row  content-contact" style="height: 120px;">
+        <p class="conus">Contact Us</p>
+    </div> -->
+    <div class="row chistory">
+        <div class="col-md-6 ">
+            <div class="row cus">
+            	<span class="GIT">ဆက်သွယ်ရန်</span>
+            	<p class="drpline">သိလိုသော အကြောင်းအရာရှိပါက မေးမြန်းနိုင်ပါသည်။ </p>
+              
+            </div>
+            <div class="row contact">   
+            <form action="{{ url_for('contactusmm') }}" class="contact-form validate-form" method="post">
+      				<div class="input-wrapping validate-input" data-validate="Name is required">
+        					<span class="input-label">အမည်:</span>
+        					<input class="input" type="text" name="UserName" id="UserName" value="{{session['u_name']}}"placeholder="အမည်အပြည့်အစုံ" required >
+        					<span class="focus-input100"></span>
+      				</div>
+
+      				<div class="input-wrapping validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+      					<span class="input-label">အီးမေးလ်:</span>
+      					<input type="email" class="input" name="EmailAdd"id="EmailAdd" value="{{session['u_email']}}" placeholder="example@gmail.com" required>
+
+      					<span class="focus-input100"></span>
+      				</div>
+
+      				<div class="input-wrapping validate-input" data-validate="Subject is required">
+                <span class="input-label">အကြောင်းအရာ:</span>
+                <select name="Subject" class="select" id="Subject" required>
+                    <option value="0">အကြောင်းအရာတခုရွေးချယ်ပါ၊</option>
+                    <option value="Feedback">တုန့်ပြန်မှုပြုရန်</option>
+                    <option value="Complaint">ကွန်ပလိန်းတက်ရန်</option>
+                    <option value="Suggestion">အကြံပြုရန်</option>
+                    <option value="Question">မေးခွန်းမေးရန်</option>
+                </select>
+                <span class="focus-input100"></span>
+                      
+              </div>
+
+      				<div class="input-wrapping validate-input" data-validate = "Message is required">
+      					<span class="input-label">မက်ဆေ့ချ်:</span>
+      					<textarea class="input" name="Message" id="Message" placeholder="မက်ဆေ့ချ်" required></textarea>
+      					<span class="focus-input100"></span>
+      				</div>
+      				<div class="input-wrapping validate-input" >
+                  <div class="alert" role="alert">{{ msg }}</div>
+              </div>
+      				<input type="submit" value="ပေးပို့မည်" class="contact-btn">
+              <input type="reset" value="ပယ်ဖျက်မည်" class="contact-btn">
+
+			     </form>
+          </div>
+        </div>
+        <div class="col-md-6 cinfo">
+        	<div class="row">
+            <div class="con-info">
+            <span class="ci">ဆက်သွယ်ရန် အချက်အလက်</span><br>
+
+            <div style="margin-top: 20px;">
+              <i class="fa fa-phone"></i>
+              <p class="tel">
+                <a href="tel:9-952-553-777" title="ဖုန်းခေါ်မည်">၀၉ ၉၅၂ ၅၅၃ ၇၇၇</a> &nbsp|&nbsp
+                <a href="tel:9-694-572-748" title="ဖုန်းခေါ်မည်">၀၉ ၆၅၉ ၅၇၂ ၇၄၈</a><br>
+              </p>
+            </div>
+            <div>
+              <i class="fa fa-envelope"></i>
+              <p class="em">
+                <a href="mailto:admin@ywb.com.mm" title="အီးမေးလ်ပို့မည်">admin@ywb.com.mm</a>
+              </p>
+            </div>
+            <div class="add" >
+              <i class="fa fa-map-marker"></i>
+                <p >အမှတ် ၁၂ ၊ သဘာဝပန်းခြံ အိမ်ရာ <span> မင်းဓမ္မလမ်း, မရမ်းကုန်းမြို့နယ်,ရန်ကုန်မြို့</span></p>
+            </div>
+          </div>
+        	</div>
+
+        	<div class="row">
+        		<div class="col-md-5"></div>
+        		<div class="col-md-7">
+        			<div class="con-icon">
+	        		   <a href="https://www.facebook.com/yangonwaterbus" title="ဖေ့စ်ဘုတ်ကတဆင့် ဆက်သွယ်ရန်"><i class="fa fa-facebook"></i></a>
+	                <a href="https://twitter.com/ywb2018" title="တွစ်တာကတဆင့် ဆက်သွယ်ရန်"><i class="fa fa-twitter"></i></a>
+	                <a href="https://www.instagram.com/ygnwaterbus" title="အင်စတာဂရမ် ကတဆင့် ဆက်သွယ်ရန်"><i class="fa fa-linkedin"></i></a>
+        		</div>
+        		</div>
+        		
+        	</div>
+            
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock %}

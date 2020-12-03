@@ -1,0 +1,90 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home {% endblock %}
+
+{% block content %}
+<div class="slide_img"><!-- start of slide_img div -->
+	<header>
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+		    <ol class="carousel-indicators">
+		      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+		      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		    </ol>
+		    <div class="carousel-inner" role="listbox">
+		      <!-- Slide One - Set the background image for this slide in the line below -->
+			    <div class="carousel-item active" style="background-image: url('../static/images/downtown.jpg')"></div>
+			      <!-- Slide Two - Set the background image for this slide in the line below -->
+			    <div class="carousel-item" style="background-image: url('../static/images/wbmain1.jpg')"> </div>
+
+			    <div class="carousel-item" style="background-image: url('../static/images/wbmain2.jpg')"></div>
+			</div>
+		    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		          <span class="sr-only">Previous</span>
+		     </a>
+		    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		       	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		        <span class="sr-only">Next</span>
+		    </a>
+		</div>
+	</header>
+</div><!-- end of slide_img div -->
+<div class="container">
+	<div class="body-main">
+		<div class="row wrp">
+			<div class="col-md-12 col-sm-12">
+				<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>Yangon Water Bus</h2>
+						<p>YWB is entering a new chapter in the Myanmar River story. It envisions to revitalize our country’s waterways with modern vessels for the use of the urban public by providing a convenient, efficient, and reliable transportation option.</p>
+					</header>
+				</div>
+			</section>
+			</div>
+		</div>
+		<div class="row img_undr_slide"><!-- start of img_under_slide div -->
+			<div class="col-md-3 col-sm-6 img_cpt">
+				<div class="row con">
+					<figure class="img_und_slide">
+						<img src="../static/images/vessel1.jpg" alt="ywb1"/>
+						<figcaption class="middle">
+							<p>Our Schedules</p>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="row bttn">
+					<button><a href="{{ url_for ('schedules')}}"> View Schedules </a></button>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 img_cpt" style="margin-bottom: 20px;">
+				<div class="row">
+					<figure class="img_und_slide">
+						<img src="../static/images/vessel2.jpg" alt="ywb2" style="padding-bottom: 5px;"/>
+						<figcaption class="middle">
+							<p>Our Jetties & Routes</p>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="row bttn">
+					<button><a href="{{ url_for ('jetties')}}"> View Jetties </a></button>
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-6 img_cpt">
+				<div class="row">
+					<figure class="img_und_slide">
+						<img src="../static/images/vessel3.jpg" alt="ywb3" style="padding-bottom: 15px;" />
+						<figcaption class="middle">
+							<p>Frequently Asked Questions</p>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="row bttn">
+					<button><a href="{{ url_for ('faq')}}"> View FAQ </a></button>
+				</div>
+			</div>
+		</div><!-- end of img_under_slide div -->
+	</div>
+</div>
+{% endblock %}

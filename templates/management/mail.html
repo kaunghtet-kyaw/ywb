@@ -1,0 +1,125 @@
+{% extends "management/base.html" %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="card">
+					<div class="card-header">
+						<h2>Mail</h2>
+					</div>
+					<div class="card-body">
+						<form id="records">
+							<div class="form-group col-md-12">
+								<table id="tblrecord" class="table" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Subject</th>
+											<th>Message</th>
+											<th>User Name</th>
+											<th>Sender Email Address</th>
+											<th>Mail Check</th>
+											<th>Posted Date</th>
+											<th>Modified Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody id="record_info">
+										{% if records %}
+										{% for temp in records %}
+										<tr>
+											<td>{{loop.index}}</td>
+											<td>{{temp.Subject}}</td>
+											<td>{{temp.Message|safe|truncate(60,True)}}</td>
+											<td>{{temp.UserName}}</td>
+											<td>{{temp.EmailAdd}}</td>
+											<td>
+												{% if temp.MCheck|int == 0 %} Unread
+												{% else %} Read
+												{% endif %}
+											</td>
+											<td>{{temp.PostedDate}}</td>
+											<td>{{temp.ModifiedDate}}</td>
+											<td class="btn_action">
+												<button type="button" class="btn btn-warning btn-edit float-left" name="m_id" value="{{temp.MailID}}" data-toggle="modal" data-target="#mailModal" onclick="view_Mail(this.value)"><i class="fas fa-eye" aria-hidden="true"></i></button>
+												<button type="button" class="btn btn-danger float-left" name="del_m_id" value="{{temp.MailID}}" onclick="del_Mail(this.value)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+											</td>
+										</tr>
+										{% endfor %}
+										{% endif %}
+										
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Subject</th>
+											<th>Message</th>
+											<th>User Name</th>
+											<th>Sender Email Address</th>
+											<th>Mail Check</th>
+											<th>Posted Date</th>
+											<th>Modified Date</th>
+											<th>Action</th>
+										</tr>
+									</tfoot><!-- tfoot.// -->
+								</table><!-- table.// -->
+							</div><!-- form-group.// -->
+						</form><!-- record form.// -->
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="mailModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="mailForm" action="/management/mail">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Mail Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="m_id" class="col-md-4 col-form-label text-md-right">Mail ID </label>
+									<div class="col-md-8">
+										<input type="text" id="m_id" class="form-control" name="m_id" disabled="" required="true">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="subject" class="col-md-4 col-form-label text-md-right">Subject </label>
+									<div class="col-md-8">
+										<input type="text" id="subject" class="form-control" name="subject" disabled=""required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="sender_name" class="col-md-4 col-form-label text-md-right">Sender Name </label>
+									<div class="col-md-8">
+										<input type="text" id="sender_name" class="form-control" name="sender_name" disabled="" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="sender_email" class="col-md-4 col-form-label text-md-right">Sender E-mail Address </label>
+									<div class="col-md-8">
+										<input type="text" id="sender_email" class="form-control" name="sender_email" disabled="" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="message" class="col-md-4 col-form-label text-md-right">Message</label>
+									<div class="col-md-8">
+										<textarea id="message" class="form-control txteditor" name="message" disabled="" required autofocus disabled="">
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="" class="col-md-4 col-form-label text-md-right"></label>
+									<label for="" class="col-md-2 col-form-label text-md-right"> Posted Date</label>
+									<label for="posted_date" class="col-md-6 col-form-label text-md-right" id="posted_date"> </label>
+								</div>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button btn-info" class="btn btn-secondary" data-dismiss="modal">OK</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+	{% endblock %}

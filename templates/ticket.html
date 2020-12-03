@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+
+{% block title %} Tickets{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-12 justify-content-center">
+        <div class="card">
+            <div class="card-header">
+                <h5>Mingalabah {{session['u_name']}}, here are your booking list.. </h5>
+            </div>
+            <div class="card-body">
+                <form id="records">
+                    <div class="form-group col-md-12">
+                        <table id="tblrecord" class="table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Route Name</th>
+                                    <th>Jetty Name</th>
+                                    <th>Travel Time</th>
+                                    <th>Travel Date</th>
+                                    <th>No. of Tickets</th>
+                                    <th>Ticket Fare</th>
+                                    <th>Total Cost</th>
+                                    <th>Booked Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="record_info">
+                                {% if records %}
+                                {% for temp in records %}
+                                <tr>
+                                    <td>{{loop.revindex}}</td>
+                                    <td>{{temp.RouteName}}</td>
+                                    <td>{{temp.JettyName}}</td>
+                                    <td>{{temp.STime}}</td>
+                                    <td>{{temp.BDueDate}}</td>
+                                    <td>{{temp.BQty}}</td>
+                                    <td>{{temp.RPrice}}</td>
+                                    <td>{{temp.RPrice*temp.BQty}}</td>
+                                    <td>{{temp.BookedDate}}</td>
+                                    <td class="btn_action">
+                                        {% if temp.Confirmation|string == '0' %}
+                                            <button type="button" class="btn btn-danger float-left" name="del_s_id" value="{{temp.BID}}" onclick="cancel_Booking(this.value)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                        {% else %}
+                                        {{temp.Confirmation}}
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                {% endif %}
+                                        
+                            </tbody>
+                            <tfoot>         
+                                 </tfoot><!-- tfoot.// -->
+                            </table><!-- table.// -->
+                            </div><!-- form-group.// -->
+                </form><!-- record form.// -->
+            </div>
+        </div>
+    </div>
+          
+</div>
+{% endblock %}

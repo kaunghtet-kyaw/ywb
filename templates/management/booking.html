@@ -1,0 +1,71 @@
+{% extends "management/base.html" %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="card">
+					<div class="card-header">
+						<h2>Booking Lists</h2>
+					</div>
+					<div class="card-body">
+						<form id="records">
+							<div class="form-group col-md-12">
+								<table id="tblrecord" class="table" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Route Name</th>
+											<th>Full Name</th>
+											<th>Email Address</th>
+											<th>Phone Number</th>
+											<th>Tickets</th>
+											<th>Rating</th>
+											<th>Booked Date</th>
+											<th>Modified Date</th>
+											<th>Confirmation</th>
+										</tr>
+									</thead>
+									<tbody id="record_info">
+										{% if records %}
+										{% for temp in records %}
+										<tr>
+											<td>{{loop.index}}</td>
+											<td>{{temp.RouteName}}</td>
+											<td>{{temp.FullName}}</td>
+											<td>{{temp.EmailAdd}}</td>
+											<td>{{temp.PhNo}}</td>
+											<td>{{temp.BQty}}</td>
+											<td>{{temp.BRating}}</td>
+											<td>{{temp.BookedDate}}</td>
+											<td>{{temp.ModifiedDate}}</td>
+											<td class="btn_action">
+												{% if temp.Confirmation|string == '0' %}
+												<button type="button" class="btn btn-warning btn-edit float-left" name="b_id" value="{{temp.BID}}" onclick="confirm_Booking(this.value)"><i class="fas fa-check" aria-hidden="true"></i></button>
+												<button type="button" class="btn btn-danger float-left" name="del_s_id" value="{{temp.BID}}" onclick="cancel_Booking(this.value)"><i class="fas fa-ban" aria-hidden="true"></i></button>
+												{% else %}
+												{{temp.Confirmation}}
+												{% endif %}
+											</td>
+										</tr>
+										{% endfor %}
+										{% endif %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Route Name</th>
+											<th>Full Name</th>
+											<th>Email Address</th>
+											<th>Phone Number</th>
+											<th>Booked Date</th>
+											<th>Tickets</th>
+											<th>Rating</th>
+											<th>Modified Date</th>
+											<th>Confirmation</th>
+										</tr>
+									</tfoot><!-- tfoot.// -->
+								</table><!-- table.// -->
+							</div><!-- form-group.// -->
+						</form><!-- record form.// -->
+					</div>
+				</div>
+			</div>
+	{% endblock %}

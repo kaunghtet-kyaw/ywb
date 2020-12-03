@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../static/images/logo.png"/>
+
+    <title>{% block title %}{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/tailwindcss@0.7.4/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+<body>
+<div id="wrapper">
+  <div class="fixed-nav-bar">
+      <nav class="navbar navbar-expand-lg navbar-light t-header">
+        <a href="{{ url_for('homemm') }}" class="lang" style="padding-top: 5px;"><i class="fa fa-language" aria-hidden="true"></i>&nbsp မြန်မာ</a>
+        <div class="dropdown navbar-nav ml-auto flex-nowrap ">
+          {% if not 'u_email' in session: %}
+          <button class="dropbtn top-bar-links"><i class="fa fa-sign-in" aria-hidden="true"></i><a href="{{ url_for('login') }}">Sign In</a></button>
+          {% endif %}
+            {% if 'u_email' in session: %}
+            <button class="dropbtn top-bar-links "><i class="fa fa-user" aria-hidden="true"></i><a href="{{ url_for('login') }}">{{session['u_name']}}</a></button>
+            <div class="dropdown-content">
+              <div class="profile-sidebar">
+
+                  <div class="profile-userpic">
+                      <img src="../static/images/no_user.png" class="img-responsive" alt="">
+                  </div>
+
+                  <div class="profile-usertitle">
+                      <div class="profile-usertitle-name">
+                          {{session['u_name']}}
+                      </div>
+                      <div class="profile-usertitle-name">
+                          {{session['u_email']}}
+                      </div>
+                       <div class="profile-usertitle-name">
+                          {{session['phoneno']}}
+                      </div>
+                  </div>
+                  <div class="profile-usermenu">
+                    <ul>
+                        <li>
+                            <a href="{{ url_for('forgetpassword')}}">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                              Account Settings </a>
+                        </li>
+                        <li>
+                         
+                            <a href="{{ url_for('tickets')}}">
+                             <i class="fa fa-ticket" aria-hidden="true"></i>
+                              View Your Tickets </a>
+                        </li>
+                        <li>
+                              <a href="{{ url_for('logout') }}" id="lobtn"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                        </li>
+
+                    </ul>
+                  </div>
+              </div>
+            </div>
+            {% endif %}
+        </div>
+      </nav>
+      <nav class="navbar navbar-collapse collapse flex-grow-1 dual-collapse2 menu-header">
+          <div class="logo"><a href="{{ url_for('home') }}"><img src="../static/images/banner_logo.png"></a></div>
+          
+          <label for="chk" class="show-menu">
+              <i class="fa fa-bars"></i>
+          </label>
+          <div class="nav">
+
+              <ul class="menu" >
+                <li class="hm"><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('aboutus') }}">About Us</a></li>
+                <li class="sub-menu"><a href="#">Services <i class="fa fa-caret-down" aria-hidden="true"></i></a>
+                  <ul class="drp-menu">
+                    <li><a href="{{ url_for('schedules') }}">Our Schedules</a></li>
+                    <li><a href="{{ url_for('jetties') }}">Our Jetties</a></li>
+                    <li><a href="{{ url_for('booking') }}">Book Tickets</a></li>
+                  </ul>
+                </li>
+                <li><a href="{{ url_for('news') }}">News & Events</a></li>
+                <li><a href="{{ url_for('contactus') }}">Contact Us</a></li>
+                <label for="chk" class="hide-menu">
+                    <i class="fa fa-times"></i>
+                </label>   
+              </ul>
+          </div>
+      </nav>
+  </div>
+  <div class="body-cont">
+          {% block content %}{% endblock %}
+  </div>
+  <footer class="page-footer font-small mdb-color pt-4">
+    <div class="footer text-center text-md-left">
+        <div class="row text-center text-md-left mt-3 pb-3">
+            <div class="col-md-2 mx-auto mt-3">
+              <a href="{{ url_for('home') }}"><img src="../static/images/banner_logo.png"></a>
+              <hr class="w-100 clearfix d-md-none">
+            <!--   <button class="btn-book-footer"><a type="button" href="{{ url_for('booking') }}"><i class="fa fa-ticket" aria-hidden="true"></i>Book Tickets</a></button>     -->
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-2 mx-auto mt-3 info-foot">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Links</h6>
+                  <p>
+                    <i class="fa fa-user mr-3" aria-hidden="true"></i><a href="{{ url_for('aboutus')}}">About Us</a></p>
+                  <p>
+                    <i class="fa fa-calendar mr-3"></i><a href="{{ url_for('schedules') }}">Our Schedules</a>
+                  </p>
+                  <p>
+                    <i class="fa fa-bus mr-3"></i><a href="{{ url_for('jetties') }}">Our Jetties</a>
+                  </p>
+                  <p>
+                    <i class="fa fa-address-card  mr-3"></i><a href="{{ url_for('contactus') }}">Contact Us</a>
+                  </p>
+                  <p>
+                    <i class="fa fa-newspaper-o mr-3"></i><a href="{{ url_for('news') }}">News & Events</a>
+                  </p>
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+
+            <div class="col-md-3 mx-auto mt-3 c-foot">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+                  <p>
+                    <i class="fas fa-home mr-3"></i> No.12, Nature Park Residence<span> Mindhama Road, Mayangone Township,Yangon</span>
+                  </p>
+                  <p>
+                    <i class="fas fa-envelope mr-3"></i> <a href="mailto:admin@ywb.com.mm" title="Email US">admin@ywb.com.mm</a>
+                  </p>
+                  <p>
+                    <i class="fas fa-phone mr-3"></i> <a href="tel:9-952-553-777" title="Call US">09 952 553 777</a> &nbsp|&nbsp
+                    <a href="tel:9-694-572-748" title="Call US">09 694 572 748</a>
+                 </p>
+                 <p>
+                    <i class="fas fa-globe mr-3"></i> <a href="{{ url_for('home') }}" title="Browse US">www.ywb.com.mm</a>
+                  </p>
+
+            </div>
+
+            <div class="col-md-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 font-weight-bold">Our Goal</h6>
+                <p>To provide convenient, efficient, and reliable water transportation system for Myanmar people around Yangon and to reduce Yangon traffic jams .</p>
+
+                <div class="footer-icons">
+                    <a href="https://www.facebook.com/yangonwaterbus"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/ywb2018"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/ygnwaterbus"><i class="fa fa-linkedin"></i></a>
+                </div>
+            </div>
+            <hr class="w-100 clearfix d-md-none">
+        </div>
+          <hr>
+        <div class="row d-flex align-items-center bottom-bar">
+            <div class="col-md-4"><li  class="list-inline-item"><p class="btn-floating btn-sm rgba-white-slight mx-1">©2019~2020 Yangon Waterbus.</p></li></div>
+            <div class="col-md-7">
+
+                <div class="text-center text-md-right">
+                    <ul class="list-unstyled list-inline">
+                      
+                      <li class="list-inline-item">
+                        <a href="{{ url_for('policy') }}" class="btn-floating btn-sm rgba-white-slight mx-1">
+                          Policy
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="{{ url_for('terms') }}" class="btn-floating btn-sm rgba-white-slight mx-1">
+                          Terms & Conditons
+                        </a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="{{ url_for('parti') }}" class="btn-floating btn-sm rgba-white-slight mx-1">
+                          Prohibited Articles
+                        </a>
+                      </li>
+    
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+      </div>
+  </footer>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+
+
+  <script src="{{ url_for('static', filename='style.js') }}"></script>
+
+</body>
+ 
+</html>

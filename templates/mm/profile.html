@@ -1,0 +1,29 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}ကိုယ်ရေးအချက်အလက်{% endblock %}
+
+{% block content %}
+<h2>Profile Page</h2>
+<div>
+    <p>Your account details are below:</p>
+    <table>
+       <tr>
+            <td>User Full Name:</td>
+            <td>{{session['u_name']}}</td>
+        </tr>
+         <tr>
+            <td>Email:</td>
+            <td> {{session['u_email']}}</td>
+        </tr>
+         <tr>
+            <td>Phone Number:</td>
+            <td> {{session['phoneno']}}</td>
+        </tr>
+         <tr>
+            <td>Gender:</td>
+            <td> {{session['gender']}}</td>
+        </tr>
+    
+    </table>
+</div>
+{% endblock %}

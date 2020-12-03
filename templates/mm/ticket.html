@@ -1,0 +1,66 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %} လက်မှတ်များ{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-12 justify-content-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>မင်္ဂလာပါ {{session['u_name']}}, လက်မှတ်များကိုကြည့်ရှုနိုင်ပါသည်.. </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="records">
+                            <div class="form-group col-md-12">
+                                <table id="tblrecord" class="table" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>နံပါတ်</th>
+                                            <th>လမ်းကြောင်းအမည်</th>
+                                            <th>ဆိပ်ခံတံတားအမှတ်</th>
+                                            <th>ထွက်ခွါချိန်</th>
+                                            <th>ထွက်ခွါမည်နေ့ရက်</th>
+                                            <th>လက်မှတ်အရေအတွက်</th>
+                                            <th>လက်မှတ်ခ</th>
+                                            <th>စုပေါင်းကုန်ကျငွေ</th>
+                                            <th>ဝယ်ယူထားသည့်နေ့ရက်</th>
+                                            <th>အခြေအနေ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="record_info">
+                                        {% if records %}
+                                        {% for temp in records %}
+                                        <tr>
+                                            <td>{{temp.BID}}</td>
+                                            <td>{{temp.RouteName}}</td>
+                                            <td>{{temp.JID}}</td>
+                                            <td>{{temp.STime}}</td>
+                                            <td>{{temp.BDueDate}}</td>
+                                            <td>{{temp.BQty}}</td>
+                                            <td>{{temp.RPrice}}</td>
+                                            <td>{{temp.RPrice*temp.BQty}}</td>
+                                            <td>{{temp.BookedDate}}</td>
+                                            <td class="btn_action">
+                                                {% if temp.Confirmation|string == '0' %}
+                                                <button type="button" class="btn btn-danger float-left" name="del_s_id" value="{{temp.BID}}" onclick="cancel_Booking(this.value)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                {% else %}
+                                                {{temp.Confirmation}}
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endif %}
+                                        
+                                    </tbody>
+                                    <tfoot>
+                                       
+                                    </tfoot><!-- tfoot.// -->
+                                </table><!-- table.// -->
+                            </div><!-- form-group.// -->
+                        </form><!-- record form.// -->
+                    </div>
+                </div>
+            </div>
+          
+</div>
+{% endblock %}

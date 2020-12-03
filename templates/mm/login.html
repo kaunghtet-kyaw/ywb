@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Yangon Water Bus</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+</head>
+<body>
+<div class="login">
+	<div class="lg_logo"><img src="../static/images/banner_logo.png"></div>
+	<div class="links">
+		<a href="{{ url_for('loginmm') }}" class="active">အကောင့်ဝင်ရန်</a>
+		<a href="{{ url_for('registermm') }}">အကောင့်ဖွင့်ရန်</a>
+	</div>
+	<form action="{{ url_for('loginmm') }}" method="post">
+		<label for="EmailAdd">
+			<i class="fas fa-envelope"></i>
+		</label>
+		<input type="email" name="EmailAdd" value="{{session['email']}}" placeholder="အီးမေးလ်" id="EmailAdd" required>
+		<label for="UPwd">
+			<i class="fas fa-lock"></i>
+		</label>
+		<input type="password" name="UPwd" placeholder="စကားဝှက်" id="UPwd" required>
+		<div class="msg">{{ msg }}</div>
+		<input type="submit" value="အကောင့်သို့ဝင်မည်">
+	</form>
+</div>
+</body>
+</html>

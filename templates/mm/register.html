@@ -1,0 +1,78 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+	<div class="register">
+			<div class="lg_logo"><img src="../static/images/banner_logo.png"></div>
+		
+			<div class="links">
+				<a href="{{ url_for('loginmm') }}" >အကောင့်ဝင်ရန်</a>
+				<a href="{{ url_for('registermm') }}" class="active">အကောင့်ဖွင့်ရန်</a>
+			</div>
+			<form action="{{ url_for('registermm') }}" method="post" autocomplete="off">
+				<label for="FullName">
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="FullName" placeholder="အင်္ဂလိပ်ဘာသာဖြင့်အမည်အပြည့်အစုံ" id="FullName" required>
+				<label for="EmailAdd">
+					<i class="fas fa-envelope"></i>
+				</label>
+				<input type="email" name="EmailAdd" placeholder="example@gmail.com" required>
+				<label for="PhNo">
+					<i class="fas fa-phone"></i>
+				</label>
+				<input type="text" name="PhNo" placeholder="+959*********" id="PhNo" autocomplete="off" required>
+				<label for="UPwd">
+					<i class="fas fa-lock"></i>
+			    </label>
+
+			    <input id="password" name="UPwd" placeholder="စကားဝှက်" type="password">
+
+				<label for="UPwd">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input id="confirmpassword" placeholder="စကားဝှက်ကိုအတည်ပြုပါ" type="password"><br>
+				<input type="radio" id="male" name="Gender" value="male" class="gen" required><p class="gen" style="width: 60px;">ကျား</p>
+				<input type="radio" id="female" name="Gender" value="female" class="gen" required><p class="gen" style="width: 60px;"> မ</p>
+
+				<div class="selection">
+					<select class="selop">
+					   	<option>Who is your favorite actor?</option>
+					   	<option>What is the name of your favorite pet?</option>
+					   	<option>What was your favorite place to visit as a child?</option>
+					</select>
+					<input id="question" name="Ans1" placeholder="answer" type="text" required>
+					<select class="selop">
+						<option>Who is your favourite person?</option>
+						<option>Who is your favourite idol?</option>
+						<option>What is your favourite movie?</option>
+				    </select>
+					<input id="question" name="Ans2" placeholder="" type="text" required>
+					<select class="selop">
+						<option>Where did your parents meet?</option>
+						<option>What is your hobby ?</option>
+						<option>What is your favorite beach ?</option>
+					</select>
+					<input id="question" name="Ans3" placeholder="answer" type="text" required>
+				</div>
+
+				<div class="usr_msg">{{ msg }}</div>
+				<input type="submit" value="Register" class="reg">
+
+				<div class="passrow2">      
+				    <div class="strength">
+				        <div id="weaks"></div>
+				        <div id="meds"></div>
+				        <div id="strongs"></div>
+				    </div>
+				 </div>
+			    <div class="passdesc">
+			      <ul>
+			      <li> စကားဝှက်သည် စာလုံးရေ အနည်းဆုံး ၄လုံးရှိရမည်.</li>
+			      <li> စကားဝှက်သည်အင်္ဂလိပ်ဘာသာဖြစ်ရမည်ဖြစ်ပြီး အက္ခရာကြီးတလုံးပါဝင်ရမည် </li>
+			      </ul>
+		      	</div>
+			</form>
+		</div>
+{% endblock %}

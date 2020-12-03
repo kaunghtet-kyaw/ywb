@@ -1,0 +1,186 @@
+{% extends "management/base.html" %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="card">
+					<div class="card-header">
+						<h2>Information</h2>
+					</div>
+					<div class="card-body">
+						<form id="records">
+							{% if session['role'] == 'Admin' %}
+							<div class="row">
+								<div class="form-group col-md-8">
+								</div>
+								<div class="form-group col-md-4">
+									<button class="btn btn-warning btn-block float-right btn_add" data-toggle="modal" data-target="#infoAddModal" type="button"> Add New</button>
+								</div>
+							</div>
+							{% endif %}
+							<div class="form-group col-md-12">
+								<table id="tblrecord" class="table" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Title</th>
+											<th>Description</th>
+											<th>Type</th>
+											<th>Image</th>
+											<th>Posted Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</thead>
+									<tbody id="record_info">
+										{% if records %}
+										{% for temp in records %}
+										<tr>
+											<td>{{loop.index}}</td>
+											<td>{{temp.ITitle}}</td>
+											<td>{{temp.IDescription|safe|truncate(60,True)}}</td>
+											<td>{{temp.IType}}</td>
+											<td>{{temp.IImg}}</td>
+											<td>{{temp.PostedDate}}</td>
+											<td>{{temp.ModifiedDate}}</td>
+											{% if session['role'] == 'Admin' %}
+											<td class="btn_action">
+												<button type="button" class="btn btn-warning btn-edit float-left" name="i_id" value="{{temp.IID}}" data-toggle="modal" data-target="#infoEditModal" onclick="edit_Info(this.value)"><i class="fas fa-pencil-alt" aria-hidden="true"></i></button>
+												<button type="button" class="btn btn-danger float-left" name="del_i_id" value="{{temp.IID}}" onclick="del_Info(this.value)"><i class="fas fa-trash-alt" aria-hidden="true"></i></button>
+											</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+										{% endif %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Title</th>
+											<th>Description</th>
+											<th>Type</th>
+											<th>Image</th>
+											<th>Posted Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</tfoot><!-- tfoot.// -->
+								</table><!-- table.// -->
+							</div><!-- form-group.// -->
+						</form><!-- record form.// -->
+					</div>
+				</div>
+			</div>
+			{% if session['role'] == 'Admin' %}
+			<!-- Modal -->
+			<div class="modal fade" id="infoAddModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="infoAddForm" action="/management/addInfo" enctype="multipart/form-data">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Add New Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="i_title" class="col-md-4 col-form-label text-md-right">Title </label>
+									<div class="col-md-8">
+										<input type="text" id="i_title" class="form-control" name="i_title" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="i_desc" class="col-md-4 col-form-label text-md-right">Description </label>
+									<div class="col-md-8">
+										<textarea id="i_desc" class="form-control txteditor" name="i_desc" required autofocus rows="">
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="i_type" class="col-md-4 col-form-label text-md-right">Information Type </label>
+									<div class="col-md-8">
+										<select class="form-control" name="i_type" id="i_type">
+											<option class="i_type" value="0"> Choose Information Type </option>
+											<option class="i_type" value="News">News</option>
+											<option class="i_type" value="Event">Event</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="i_desc" class="col-md-4 col-form-label text-md-right">Image File </label>
+									<div class="col-md-8">
+										<input type="file" id="i_img" class="form-control" name="i_img" accept="image/*" required autofocus>
+									</div>
+								</div>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" class="btn btn-warning" onclick="add_Info()">Save</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="modal fade" id="infoEditModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<form method="POST" id="infoEditForm" action="/management/editInfo" enctype="multipart/form-data">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="ModalLabel">Edit Information</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="form-group row">
+									<label for="edit_i_id" class="col-md-4 col-form-label text-md-right">Information ID </label>
+									<div class="col-md-8">
+										<input type="text" id="edit_i_id" class="form-control" name="edit_i_id" disabled="" required="true">
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="edit_i_title" class="col-md-4 col-form-label text-md-right">Title </label>
+									<div class="col-md-8">
+										<input type="text" id="edit_i_title" class="form-control" name="edit_i_title" required autofocus>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="edit_i_desc" class="col-md-4 col-form-label text-md-right">Description </label>
+									<div class="col-md-8">
+										<textarea id="edit_i_desc" class="form-control txteditor" name="edit_i_desc" required autofocus rows="">
+										</textarea>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="edit_i_type" class="col-md-4 col-form-label text-md-right">Information Type </label>
+									<div class="col-md-8">
+										<select class="form-control" name="edit_i_type" id="edit_i_type">
+											<option class="edit_i_type" value="0"> Choose Information Type </option>
+											<option class="edit_i_type" value="News">News</option>
+											<option class="edit_i_type" value="Event">Event</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group row" id="img">
+									<label for="edit_i_img" class="col-md-4 col-form-label text-md-right">Image File </label>
+									<div class="col-md-8">
+										<img src="" width="200"><br>
+										<input type="file" id="edit_i_img" class="form-control" name="edit_i_img" accept="image/*" required autofocus>
+									</div>
+								</div>
+								
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+								<button type="button" onclick="update_Info()" class="btn btn-warning">Update</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			{% endif%}
+	{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+
+{% block title %}Booking{% endblock %}
+{% block content %}
+<div class="container" >
+  	<div class="body-main">
+  	<div class="row">
+	    <nav aria-label="breadcrumb"> <!-- start of breadcrumb nav -->
+	        <ol class="breadcrumb">
+	            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+	            <li class="breadcrumb-item active" aria-current="page">Booking</li>
+	        </ol>
+	    </nav> <!-- end of breadcrumb nav -->
+  	</div>
+  	<div class="row jetty"> <!-- start of jetty div -->
+  		<div class="col-md-1"></div>
+  		<div class="col-md-9">
+  			<section class="one">
+
+			    <form method="POST" id="makeBkingForm" action="/makebooking" enctype="multipart/form-data">
+
+			    <div class="search-block-1"><!-- start of seartch-block-1 div -->
+	     			<div class="logo">
+	     			 	<a href="#"><img src="../static/images/banner_logo.png"></a>
+	     			</div>
+	     			 <hr style="background: #fff; font-weight: bold;">
+				    <div class="area">
+					        <select class="form-control route-select" name="RID"id="r_select" >
+							<option class="RID" value="0"> Select Route  </option>
+								{% if records %}
+								{% for temp in records %}
+									<option class="RID" value="{{temp.RID}}">{{temp.RouteName}}</option>
+								{% endfor %}
+								{% endif %}
+						    </select>
+				    </div>
+	    			<div> <!-- start of div -->
+				    	<div class="container-book">
+					        <div class="container-time">
+					            <select class="form-control jetty-select" id="j_select" name="JID" >
+									<option class="JID" value="0"  > Select Departure Terminal..</option>
+									{% if j_records %}
+									{% for temp in j_records %}
+										<option data-eventttype="{{temp.RID}}"  class="JID hidden" value="{{temp.JID}}">{{temp.JettyName}}</option>
+									{% endfor %}
+									{% endif %}
+								</select>  
+					        </div>
+				        </div>
+			    		<div class="jetty-time">
+			        		<div class="container-book fare-select">
+						        <div class="container-jetty">
+							        <input type="text" id="r_price" disabled="" placeholder="Waterbus Fare">
+							        {% if records %}
+									{% for temp in records %}
+							           	<input data-eventttype="{{temp.RID}}" type="text" value="{{temp.RPrice}} Ks" name="RPrice" placeholder="000 Ks" class="hidden" id="price" disabled="" required> 
+							        {% endfor %}
+									{% endif %}
+						        </div>
+	  					        <div class="container-time">
+	  					            <select class="form-control time-select" name="SID"  id="t_select" >
+	  									<option class="RID"value="0"> Enter time... </option>
+											{% if Sch_records %}
+											{% for temp in Sch_records %}
+												<option id="dformat" data-eventttype="{{temp.JID}}" value="{{temp.SID}}" class="JID hidden">{{temp.SType}} - {{temp.FSTime}}</option>
+											{% endfor %}
+											{% endif %}
+									</select>
+						         </div>
+			        		</div>
+					        <div class="container-time">
+
+			                  <div class="form-group" id="bkdate">
+			                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+			                        <input type="text" name="BDueDate" class="form-control datetimepicker-input" placeholder="Your Departure Date" data-target="#datetimepicker2" id="d_time" required/>
+			                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+			                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+			                        </div>
+			                    </div>
+			                </div>
+
+					        </div>
+					        <div class="container-time">
+					            <select name="BQty" id="b_qty">
+								    <option class="BQty"  value="0"> Number of Tickets... </option>
+					              	<option value="1">1</option>
+					              	<option value="2">2</option>
+					              	<option value="3">3</option>
+					              	<option value="4">4</option>
+					              	<option value="5">5</option>
+					            </select>
+					        </div>
+			                <div class="container-time">
+			                    <span class="label">Personal Info</span>
+			                    <input type="text" value="{{session['u_name']}}" name="FullName"  class="uname" id="f_name">
+			                    <input type="text" value="{{session['u_email']}}" name="EmailAdd" class="emailadd" id="e_add">
+			                </div>
+			    		</div>
+						<button type="button" class="btn primary" onclick="makeBking()">Book</button>
+
+      				</div><!-- end of div -->
+    			</div><!-- end of seartch-block-1 div -->     
+				</form>
+    		</section>
+  		</div>
+  	</div><!-- end of jetty div -->
+ </div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'layout.html' %}
+
+{% block title %} Contact Us{% endblock %}
+
+{% block content %}
+<div class="contus">
+<div class="container" >
+  <div class="body-main">
+    <div class="row">
+        <nav aria-label="breadcrumb"><!-- start of breadcrumb nav -->
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+          </ol>
+        </nav><!-- end of breadcrumb nav -->
+    </div>
+    <div class="row chistory">
+      <div class="col-md-7 "> <!-- start of col-md-7n div -->
+          <div class="row cus">
+              <span class="GIT" title="Fill the form below!">Contact Us</span>
+              <p class="drpline">If you have questions or feedbacks, please feel free to drop us a line.</p>   
+          </div>
+          <div class="row contact">  
+
+            <form action="{{ url_for('contactus') }}" class="contact-form validate-form" id="sendForm" method="post">
+          			<div class="input-wrapping validate-input" data-validate="Name is required">
+          					<span class="input-label">Name:</span>
+          					<input class="input" type="text" name="UserName" id="UserName" value="{{session['u_name']}}" placeholder="full name" required >
+          					<span class="focus-input100"></span>
+          			</div>
+
+        				<div class="input-wrapping validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+          					<span class="input-label">Email:</span>
+          					<input type="email" class="input" name="EmailAdd"id="EmailAdd" value="{{session['u_email']}}" placeholder="example@gmail.com" required>
+          					<span class="focus-input100"></span>
+        				</div>
+
+        				<div class="input-wrapping validate-input" data-validate="Phone is required">
+        					  <span class="input-label">Subject:</span>
+                    <select name="Subject" class="select" id="Subject" required>
+                        <option value="0">Select a Subject</option>
+                        <option value="Feedback">Feedback</option>
+                        <option value="Complaint">Complaint</option>
+                        <option value="Suggestion">Suggestion</option>
+                        <option value="Question">Question</option>
+                    </select>
+        					  <span class="focus-input100"></span>
+                  
+        				</div>
+
+        				<div class="input-wrapping validate-input" data-validate = "Message is required">
+          					<span class="input-label">Message:</span>
+          					<textarea class="input" name="Message" id="Message" placeholder="messages" required></textarea>
+          					<span class="focus-input100"></span>
+        				</div>
+                <div class="input-wrapping validate-input" >
+                    <div class="alert" role="alert">{{ msg }}</div>
+                </div>
+                <input type="submit" value="Send" class="contact-btn">
+        				<input type="reset" value="Cancel" class="contact-btn">
+  			     </form>
+          </div>
+        </div><!-- end of col-md-7n div -->
+        <div class="col-md-5 cinfo"> <!-- start of cinfo div -->
+        	<div class="row">
+              <div class="con-info">
+                <p class="ci" style="padding-top: 20px;">Contact Information</p>
+                <div style="margin-top: 20px;">
+                    <i class="fa fa-phone"></i>
+                    <p class="tel">
+                      <a href="tel:9-952-553-777" title="Call US">09 952 553 777</a> &nbsp|&nbsp
+                      <a href="tel:9-694-572-748" title="Call US">09 694 572 748</a><br>
+                    </p>
+                </div>
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p class="em">
+                      <a href="mailto:admin@ywb.com.mm" title="Email US">admin@ywb.com.mm</a>
+                    </p>
+                </div>
+                <div class="add" >
+                    <i class="fa fa-map-marker"></i>
+                    <p >No.12, Nature Park Residence<span> Mindhama Road, Mayangone Township, Yangon</span></p>
+                </div>
+              </div>
+        	</div>
+        	<div class="row">
+        		<div class="col-md-5"></div>
+        		<div class="col-md-7">
+        			  <div class="con-icon">
+  	        		     <a href="https://www.facebook.com/yangonwaterbus"><i class="fa fa-facebook"></i></a>
+  	                 <a href="https://twitter.com/ywb2018"><i class="fa fa-twitter"></i></a>
+  	                 <a href="https://www.instagram.com/ygnwaterbus"><i class="fa fa-linkedin"></i></a>
+        		    </div>
+        		</div>
+        		
+        	</div>
+            
+        </div><!-- end of cinfo div -->
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

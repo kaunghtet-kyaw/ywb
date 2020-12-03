@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div class="body-main-about">
+
+		<div class="row">
+            <!-- start of breadcrumb nav -->
+
+	       <nav aria-label="breadcrumb">
+	          <ol class="breadcrumb">
+	            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+	            <li class="breadcrumb-item active" aria-current="page">About Us</li>
+	          </ol>
+	       </nav> <!-- end of breadcrumb nav -->      
+    	</div>
+    	<div class="row  content-contact" style="height: 120px; margin-bottom: 20px;">
+        <p class="conus">History of Company</p>
+    	</div>
+    	<div class="row aboutus "> <!-- start of aboutus -->      
+    		<div class="col-md-5  ">
+                <div class="comp_img"><img src="../static/images/ywbcere.jpg">@Yangon Water Bus Openning Ceremony</div>	
+    		</div>
+    		<div class="col-md-7 our_history"> <!-- start of our_history -->      
+    			<p>
+    				Yangon Water Bus’s history is dated back to 2016, when the professional river cruise and yacht operator and tour company Tint Tint Myanmar Group of Companies started to work to utilize its decade long water-based hospitality expertise in public focused water transportation services and help Yangon Regional Government to create a new transportation system in Yangon.</p>
+
+					<p>Yangon Regional Government has long envisioned to utilize the waterways surrounding the city as routes of transportation, complementary to the existing land transportation. Though there has been a long history of naval and maritime expertise in Myanmar since pre-colonial times, most of the water transportation services available for the general public are faltering in terms of both machinery and operational know-hows.</p>
+
+					<p> Yangon Water Bus envisions to revitalize our country’s waterways with modern vessels and international expertise for the use of the general public by providing a convenient, efficient, and reliable water transportation option.</p>
+
+    		</div><!-- end of our_history -->
+    	</div><!-- end of aboutus div -->      
+    	<div class="row goal"> <!-- start of our goal -->
+    		<span>Our Goal</span>
+    		<p>To provide convenient, efficient, and reliable water transportation system for Myanmar people around Yangon and to reduce Yangon traffic jams .</p>
+
+    		<p>Yangon Water Bus would like to be the role model of water transportation systems in Southeast Asia and a forerunner of customer satisfaction with highly affordable prices and uncompromising safety standards. Yangon Water Bus’s mission is to ease our customers’ daily commute with continuously improving services and standards in the water transportation industry of Myanmar.</p>
+    	</div> <!-- end of goal -->
+        <div class="row goal"> <!-- start of our services -->
+            <span>Our Services</span>
+            <p>The Yangon Waterbus System may be cheap for transportation but the services there aren’t because we provide life insurance for every passenger who holds a ticket on board. We also lent life jackets to customers who have fears of bodies of water or customers with children. </p>
+
+            <p>There is also a medical expert on board with a first aid kit and a life guard if anything goes wrong such as health problems or customers falling of deck. Hungry customers can go to the food court that sells all types of snacks and healthy meals that are always inspected monthly by a health inspector. Also children under the height of 4feet and 7 inches may enjoy a free ride on the Yangon Waterbus and will have special care.</p>
+        </div><!-- end of our services -->
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "management/base.html" %}
+	{% block head %} User {% endblock %}
+	{% block content %}
+			<div class="col-md-12 justify-content-center">
+				<div class="card">
+					<div class="card-header">
+						<h2>User</h2>
+					</div>
+					<div class="card-body">
+						<form id="records">
+							<div class="form-group col-md-12">
+								<table id="tblrecord" class="table" width="100%">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Full Name</th>
+											<th>Email Address</th>
+											<th>Phone Number</th>
+											<th>Gender</th>
+											<th>Created Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</thead>
+									<tbody id="record_info">
+										{% if records %}
+										{% for temp in records %}
+										<tr>
+											<td>{{loop.index}}</td>
+											<td>{{temp.FullName}}</td>
+											<td>{{temp.EmailAdd}}</td>
+											<td>{{temp.PhNo}}</td>
+											<td>{{temp.Gender}}</td>
+											<td>{{temp.CreatedDate}}</td>
+											<td>{{temp.ModifiedDate}}</td>
+											{% if session['role'] == 'Admin' %}
+											<td>
+												<button type="button" class="btn btn-danger" name="del_u_id" value="{{temp.UID}}" onclick="del_User(this.value)"><i class="fas fa-trash-alt"  aria-hidden="true"></i></button>
+											</td>
+											{% endif %}
+										</tr>
+										{% endfor %}
+										{% endif %}
+									</tbody>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Full Name</th>
+											<th>Email Address</th>
+											<th>Phone Number</th>
+											<th>Gender</th>
+											<th>Created Date</th>
+											<th>Modified Date</th>
+											{% if session['role'] == 'Admin' %}
+											<th>Action</th>
+											{% endif %}
+										</tr>
+									</tfoot><!-- tfoot.// -->
+								</table><!-- table.// -->
+							</div><!-- form-group.// -->
+						</form><!-- record form.// -->
+					</div>
+				</div>
+			</div>
+	{% endblock %}

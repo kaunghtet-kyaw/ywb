@@ -1,0 +1,95 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}ပင်မစာမျက်နှာ{% endblock %}
+
+{% block content %}
+<div class="slide_img">
+	<header>
+		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+		    <ol class="carousel-indicators">
+		      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+		      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		    </ol>
+		    <div class="carousel-inner" role="listbox">
+		      <!-- Slide One - Set the background image for this slide in the line below -->
+			    <div class="carousel-item active" style="background-image: url('../static/images/wbmain2.jpg')"></div>
+			      <!-- Slide Two - Set the background image for this slide in the line below -->
+			    <div class="carousel-item" style="background-image: url('../static/images/wbmain1.jpg')"> </div>
+
+			    <div class="carousel-item" style="background-image: url('../static/images/wbmain5.jpg')"></div>
+			</div>
+		    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		          <span class="sr-only">Previous</span>
+		     </a>
+		    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		       	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		        <span class="sr-only">Next</span>
+		    </a>
+		</div>
+	</header>
+</div>
+<div class="container">
+	<div class="body-main">
+		<div class="row wrp">
+			<div class="col-md-12 col-sm-10">
+				<section class="wrapper">
+				<div class="inner">
+					<header class="special">
+						<h2>ရန်ကုန်ရေပေါ်ဘတ်စ်</h2>
+						<p>ရန်ကုန်ရေပေါ်ဘတ်စ် သည် မြန်မာ့မြစ်ရာဇဝင်တွင် စာမျက်နှာသစ်တစ်ခုဖြစ်သည်။ ရန်ကုန်ရေပေါ်ဘတ်စ်သည် ရန်ကုန်မြို့ရှိရေကြောင်းပေါ်တွင် အဆင့်မီ ရေယာဉ် များနှင့် နိုင်ငံတကာလုပ်ငန်းများ ကို အသုံးပြု၍ သက်သာလွယ်ကူသော၊ စိတ်ချရသော ရေလမ်းသယ်ယူပို့ဆောင်ရေးတခုကို ထောက်ပန့်ပေးစေရန် ရည်ရွယ်သည်။</p>
+					</header>
+				</div>
+			</section>
+			</div>
+		</div>
+		<div class="row img_undr_slide">
+			<div class="col-md-3 img_cpt">
+				<div class="row con">
+					<figure class="img_und_slide">
+						<img src="../static/images/vessel1.jpg" alt="ywb1"/>
+						<figcaption class="middle">
+							<h2>သင်္ဘောထွက်ခွာချိန်ပြဇယား</h2>
+							<p></p>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="row bttn">
+					<button><a href="{{ url_for ('schedulesmm')}}"> ကြည့်ရှုရန် </a></button>
+				</div>
+			</div>
+			<div class="col-md-3 img_cpt">
+				<div class="row">
+					<figure class="img_und_slide">
+						<img src="../static/images/vessel2.jpg" alt="ywb2" style="padding-bottom: 5px;"/>
+						<figcaption class="middle">
+							<h2>ရေလမ်းနှင့်ဆိပ်ခံတံတားများကိုကြည့်ရှုရန်</h2>
+							<p></p>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="row bttn">
+					<button><a href="{{ url_for ('jettiesmm')}}"> ကြည့်ရှုရန် </a></button>
+				</div>
+			</div>
+			<div class="col-md-3 img_cpt">
+				<div class="row">
+					<figure class="img_und_slide">
+						<img src="../static/images/vessel3.jpg" alt="ywb3" style="padding-bottom: 15px;" />
+						<figcaption class="middle">
+							<h2>အမေးများသော မေးခွန်းများ၏အဖြေကိုကြည့်ရှုရန်</h2>
+							<p></p>
+						</figcaption>			
+					</figure>
+				</div>
+				<div class="row bttn">
+					<button><a href="{{ url_for ('faqmm')}}"> ကြည့်ရှုရန်</a></button>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+</div>
+{% endblock %}

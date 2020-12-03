@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block title %}Our Schedules{% endblock %}
+{% block content %}
+<div class="container" >
+  <div class="body-main">
+  <div class="row">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Our Schedules</li>
+          </ol>
+      </nav>
+  </div>
+  <div class="row  content-contact" style="height: 120px; margin-bottom: 20px;">
+      <p class="conus">Our Schedules</p>
+  </div>
+  <div class="row jetty">
+      <div class="col-md-8 card ">
+        <div class="card-header">
+            <select class="stype form-control route-selection">
+            <option class="RID" value="0"> Select Your desire route</option>
+
+             {% if records %}
+             {% for temp in records %}
+                <option value="{{temp.RID}}">{{temp.RouteName}}</option>
+             {% endfor %}
+             {% endif %}   
+            </select>
+        </div>
+        <div class="card-header">
+              <select class="form-control type-select" name="JID">
+                <option class="SID" value="0"> Select Type.</option>
+                {% if records %}
+                {% for temp in records %}
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden" value="All">All</option>
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden" value="Weekday">Weekday</option>
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden"  value="Weekend">Weekend</option>
+                    <option data-eventttype="{{temp.RID}}" class="SID hidden"  value="Special Schedule">Special Schedule</option>
+                {% endfor %}
+                {% endif %}
+              </select> 
+        </div>
+
+        <div class="card-body">
+            <form id="records">
+              <div class="form-group col-md-12">
+                  <table id="tblrecord" class="table" width="100%">    
+                   <thead>
+                      <tr> 
+                        <th>Type</th>
+                          <th>Jetty Name</th>
+                          <th>Departure Time</th>
+                          <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="record_info" class="recruiter detail-select">
+                    {% if Sch_records %}
+                    {% for temp in Sch_records %}
+                      <tr data-eventttype="{{temp.SType}}" class="SID hidden">
+
+                          <td>{{temp.SType}}</td>
+                          <td>{{temp.JettyName}}</td>
+                          <td>{{temp.FSTime}}</td>
+                          <td>{{temp.RPrice}} Ks</td>
+                      </tr>
+                    {% endfor %}
+                    {% endif %}
+                    </tbody>
+                         
+                  </table><!-- table.// -->
+              </div><!-- form-group.// -->
+            </form><!-- record form.// -->
+
+        </div>
+     
+      </div>
+     
+        
+  <div class="col-md-3 btn-book-div">
+    <a href="{{ url_for('booking') }}" class="btn-book"><i class="fa fa-ticket" aria-hidden="true"></i>Book Tickets</a>            
+  </div>
+  </div>
+
+  </div>
+{% endblock %}

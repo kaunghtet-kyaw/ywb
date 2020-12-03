@@ -1,0 +1,56 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="register"><!-- start of register div -->
+    <hr>
+      <div class="lg_logo"><img src="../static/images/banner_logo.png"></div>
+      <hr>
+      <div class="links">
+        <a href="{{ url_for('loginmm') }}" >Sign In</a>
+        <a href="{{ url_for('registermm') }}" class="active">Sign Up</a>
+      </div>
+      <form action="{{ url_for('chpwdmm') }}" method="post" autocomplete="off">
+          <input id="UID" value="{{session['urID']}}" name="UID" placeholder="UserID" type="text" hidden>
+
+        <label for="UPwd">
+          <i class="fas fa-lock"></i>
+          </label>
+
+          <input id="password" name="UPwd" placeholder="Password" type="password">
+
+        <label for="UPwd">
+          <i class="fas fa-lock"></i>
+        </label>
+          <input id="confirmpassword" placeholder="Confirm Password" type="password">
+         
+        <div class="usr_msg">{{ msg }}</div>
+        <input type="submit" value="Register" class="reg">
+
+        <div class="passrow2">      
+            <div class="strength">
+                <div id="weaks"></div>
+                <div id="meds"></div>
+                <div id="strongs"></div>
+            </div>
+            <div class="passleft">
+                <div id="passstatus"></div>    
+            </div>
+         </div>
+          <div class="passdesc">
+            <ul>
+              <li> Passwords must be at least 4 characters long</li>
+              <li> Password must contain at least 1 uppercase character. </li>
+            </ul>
+            </div>
+      </form>
+    </div><!-- end of register div -->
+
+  </div>
+</div>
+
+
+{% endblock %}

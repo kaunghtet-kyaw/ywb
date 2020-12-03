@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="login-container">
+<div class="login">
+	<hr>
+	<div class="lg_logo "><img src="../static/images/banner_logo.png"></div>
+	<hr>
+	<div class="links">
+		<a href="{{ url_for('login') }}" class="active">Sign In</a>
+		<a href="{{ url_for('register') }}">Sign Up</a>
+	</div>
+	<form action="{{ url_for('login') }}" method="post">
+		<label for="EmailAdd">
+			<i class="fas fa-envelope"></i>
+		</label>
+		<input type="email" name="EmailAdd" value="{{session['usr_email']}}" placeholder="Email" required>
+		<label for="UPwd">
+			<i class="fas fa-lock"></i>
+		</label>
+		<input type="password" name="UPwd" placeholder="Password" id="UPwd" required>
+		<div class="usr_msg">{{ msg }}</div>
+		<input type="submit" value="Login">
+		<a href="{{ url_for('forgetpassword') }}" class="forgetpwd">Forgot your password ?</a>
+
+	</form>
+</div>
+</div>
+{% endblock %}

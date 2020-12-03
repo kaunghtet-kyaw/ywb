@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+
+{% block title %}Our Jetties{% endblock %}
+{% block content %}
+<div class="container" >
+    <div class="body-main">
+        <div class="row">
+           <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Our Jetties</li>
+              </ol>
+            </nav>
+        </div>
+    <div class="row  content-contact" style="height: 120px; margin-bottom: 20px;">
+        <p class="conus">Our Jetties</p>
+    </div>
+    <div class="row jetty">
+        <div class="col-md-4 col-sm-3 jty ">
+            <div class="row">
+            <div class=" tab">
+                <button class="tab_dp">Choose a Route</button>
+                <div class="tabbut">
+                    {% if records %}
+                    {% for temp in records %}
+                    <button class="tablinks active" onclick="openRoute('{{temp.RID}}')">{{temp.RouteName}}</button>
+
+                    {% endfor %}
+                    {% endif %}
+                  
+                </div>
+            </div>
+            </div>         
+        </div>
+        <div class="col-md-8 col-sm-8 jty-rou ">
+            <div class="row jetty_desc">
+                {% if records %}
+                    {% if Rou_records %}
+                    {% for temp in Rou_records %}
+                        <div class="row tabcontent route_{{temp.RID}}">
+                            <div class="row "><i class="fas fa-anchor"></i><span class="jetname">{{temp.JettyName}}</span></div>
+                            <div class="row terminal"><span><em>Terminal Address :</em>{{temp.JettyAdd|safe}}</span></div>
+                            <div class="row busstop"><span><em>Nearby Bus Stop : </em>&nbsp&nbsp <br>{{temp.BusStop}}</span></div>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                {% endif %}
+                
+            </div>
+
+         </div>
+      
+    </div>
+ </div>
+ </div>
+
+{% endblock %}

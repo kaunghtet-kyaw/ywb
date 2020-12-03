@@ -1,0 +1,78 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}သတင်းနှင့်အစီအစဉ်များ{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+	    <nav aria-label="breadcrumb">
+	        <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('homemm') }}">ပင်မစာမျက်နှာ</a></li>
+                <li class="breadcrumb-item active"><a href="{{ url_for('newsmm') }}">သတင်းနှင့်အစီအစဉ်များ</a></li>
+            </ol>
+	    </nav>
+    </div>
+    <div class="row  content-contact" style="height: 120px; margin-bottom: 20px;">
+        <p class="conus">သတင်းနှင့်အစီအစဉ်များ</p>
+    </div>
+
+    <div class="singleblog">
+
+     {% if records %}
+     <div class="row infowrp info_{{records[0]}}">    
+        <div class="info_wrapper">
+            <h3>{{records[1]}}</h3>
+            <h5 class="sg_news_postdate"><i class="fa fa-clock-o" aria-hidden="true"></i> {{records[7]}}</h5>  
+            <figure class="hero-figure">
+                <img class="img-sgblog" src="/static/images/info/{{records[4]}}" alt="">
+            </figure>
+            <span class="infoType">{{records[3]}}</span>
+             <article>
+                <p>
+                    {{records[2]|safe}}
+                </p>
+            </article>
+        </div>
+     </div>
+
+
+    {% endif %}
+    </div>
+    <div class="row" style="height: 70px;"></div>
+     <div class="row" id="commentinfo">
+    {% if not 'u_email' in session: %}
+
+        <span class="wrm-cmt">မှတ်ချက်ပြုရန်..</span><br>
+    {% endif %}
+
+        <div class="col-md-9">
+            <div class="comment-container">
+
+                {% if 'u_email' in session: %}
+
+                <form method="POST" id="addComment" action="/addcmtInfo/" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <textarea class="form-control status-box" rows="2" name="i_desc" id="i_desc" placeholder="မှတ်ချက်ပြုပါ..." required></textarea>
+                    </div>
+                
+                    <div class="button-group pull-right">
+                        <button type="button" class="btn btn-primary" value="{{records[0]}}" name="i_id" onclick="addCmtInfo(this.value)">ပို့စ်ရန်</button>
+                    </div>
+                </form>
+                {% endif %}
+
+                {% if cmt_records %}
+                {% for temp in cmt_records %}
+                    <ul class="posts">
+                        <li class="fullname"><i class="fa fa-user" aria-hidden="true" style="margin-right: 10px;"></i>{{temp.FullName}}</li>
+                        <li class="cdesc"><i class="fa fa-comments-o" aria-hidden="true" style="margin-right: 10px;"></i>{{temp.CDescription}} </li>
+                        <li class="cdate"><i class="fa fa-calendar" aria-hidden="true" style="margin-right: 10px;"></i>{{temp.CreatedDate}}</li>
+                    </ul>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}ကျေးဇူးတင်ပါသည်{% endblock %}
+
+{% block content %}
+
+<div class="container">
+	<div class="container-thanks">
+		<div class="site-header" id="header">
+				<h1 class="site-header__title" data-lead-id="site-header-title">အထူးကျေးဇူးတင်ပါသည်</h1>
+		</div>
+
+		<div class="main-content">
+				<i class="fa fa-check main-content__checkmark" id="checkmark"></i>
+				<p class="main-content__body" data-lead-id="main-content-body"> ရန်ကုန်ရေပေါ်ဘတ်စ် အဖွဲ့သားများမှ ရန်ကုန်ရေပေါ်ဘတ်စ်သယ်ယူပို့ဆောင်ရေးစနစ် ကိုအသုံးပြု၍ လက်မှတ်ဝယ်ယူခြင်းအတွက် ကျေးဇူးတင်ပါသည်။ </p>
+		</div>
+		<div class="container-rating" >
+		 	<div class="rpopup">
+				<p>Would you like to rate us?.</p>
+				<button data-js="open">Rate</button>
+		 	</div>
+	
+			<div class="popup">
+				<div class="container-time" >
+					<div><button class="btn-times"  name="close" name="close"><i class="fa fa-times" aria-hidden="true"></i></button></div>
+
+				 	<div class="logo">
+	     			 	<a href="#"><img src="../static/images/banner_logo.png"></a>
+						
+	     			</div>
+
+
+                 	<span class="ratting-title">ကျေးဇူးပြု၍ ဝန်ဆောင်မှုကိုအကဲဖြတ်ပါ!</span>
+
+	                <form action="{{ url_for('edit_ratingmm') }}" method="post" autocomplete="off">
+
+		                <div class="stars">
+		                    <label class="rate">
+		                      <input type="radio" name="BRating" id="star1" value="1" required>
+		                      <div class="face"></div>
+		                      <i class="far fa-star star one-star"></i>
+		                    </label>
+		                    <label class="rate">
+		                      <input type="radio" name="BRating" id="star2" value="2">
+		                      <div class="face"></div>
+		                      <i class="far fa-star star two-star"></i>
+		                    </label>
+		                    <label class="rate">
+		                      <input type="radio" name="BRating" id="star3" value="3">
+		                      <div class="face"></div>
+		                      <i class="far fa-star star three-star"></i>
+		                    </label>
+		                    <label class="rate">
+		                      <input type="radio" name="BRating" id="star4" value="4">
+		                      <div class="face"></div>
+		                      <i class="far fa-star star four-star"></i>
+		                    </label>
+		                    <label class="rate">
+		                      <input type="radio" name="BRating" id="star5" value="5">
+		                      <div class="face"></div>
+		                      <i class="far fa-star star five-star"></i>
+		                    </label>
+		                </div>
+
+		                <div class="rating-letter"><span style="padding-bottom: 30px;">If you enjoy using our services, would you mind taking a moment to rate it. Thanks for your support. </span><br>
+		                </div>
+						
+						<!-- <button  name="rate" name="rate">Rate</button> -->
+						<input class="button" type="submit" name="" value="Rate">
+
+	            	</form>
+
+	           
+                </div>
+			</div>
+
+		</div>	
+	</div>	
+</div>
+
+{% endblock %}

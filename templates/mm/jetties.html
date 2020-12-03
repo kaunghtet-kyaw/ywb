@@ -1,0 +1,62 @@
+{% extends 'layoutmm.html' %}
+
+{% block title %}ဆိပ်ခံတံတားများ{% endblock %}
+
+{% block content %}
+<div class="container" >
+    <div class="body-main">
+    <div class="row">
+       <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('home') }}">ပင်မစာမျက်နှာ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ဆိပ်ခံတံတားများ</li>
+          </ol>
+        </nav>
+    </div>
+    <div class="row  content-contact" style="height: 120px; margin-bottom: 20px;">
+        <p class="conus">ဆိပ်ခံတံတားများ</p>
+    </div>
+    <div class="row jetty">
+
+
+        <div class="col-md-1 "></div>
+        <div class="col-md-4 col-sm-6 jty ">
+            <div class="row">
+            <div class="tab">
+                <button class="tab_dp">လမ်းကြောင်းရွေးချယ်ရန် &nbsp&nbsp</button>
+                <div class="tabbut">
+                    {% if records %}
+                    {% for temp in records %}
+                    <button class="tablinks" onclick="openRoute('{{temp.RID}}')">{{temp.RouteName}}</button>
+                    {% endfor %}
+                    {% endif %}
+                  
+                </div>
+            </div>
+            </div>
+            <div class="row">
+            
+            </div>
+        </div>
+          <div class="col-md-7 col-sm-6 jty-rou ">
+            <div class="row jetty_desc">
+                {% if records %}
+                    {% if Rou_records %}
+                    {% for temp in Rou_records %}
+                        <div class="row tabcontent route_{{temp.RID}}">
+                            <div class="row "><i class="fas fa-anchor"></i><span class="jetname">{{temp.JettyName}}</span></div>
+                            <div class="row terminal"><span><em>Terminal Address :</em>{{temp.JettyAdd|safe}}</span></div>
+                            <div class="row busstop"><span><em>Nearby Bus Stop : </em>&nbsp&nbsp <br>{{temp.BusStop}}</span></div>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                {% endif %}
+                
+            </div>
+         </div>
+      
+    </div>
+ </div>
+ </div>
+
+{% endblock %}
